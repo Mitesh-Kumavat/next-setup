@@ -1,9 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { Moon, Sun } from "lucide-react"
+import { Moon, Sun, Check } from "lucide-react"
 import { useTheme } from "next-themes"
-
 import { Button } from "@/components/ui/button"
 import {
     DropdownMenu,
@@ -13,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 export function ModeToggle() {
-    const { setTheme } = useTheme()
+    const { setTheme, theme } = useTheme()
 
     return (
         <DropdownMenu>
@@ -24,17 +23,29 @@ export function ModeToggle() {
                     <span className="sr-only">Toggle theme</span>
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
+            <DropdownMenuContent align="end" className="flex flex-col">
+                <DropdownMenuItem
+                    onClick={() => setTheme("light")}
+                    className={`flex justify-between ${theme === "light" && "font-semibold"}`}
+                >
                     Light
+                    {theme === "light" && <Check className="w-4 h-4" />}
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
+                <DropdownMenuItem
+                    onClick={() => setTheme("dark")}
+                    className={`flex justify-between ${theme === "dark" && "font-semibold"}`}
+                >
                     Dark
+                    {theme === "dark" && <Check className="w-4 h-4" />}
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
+                <DropdownMenuItem
+                    onClick={() => setTheme("system")}
+                    className={`flex justify-between ${theme === "system" && "font-semibold"}`}
+                >
                     System
+                    {theme === "system" && <Check className="w-4 h-4" />}
                 </DropdownMenuItem>
             </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu >
     )
 }
